@@ -1,0 +1,120 @@
+
+:host {
+}
+
+.paz {
+  position: relative;
+  z-index: 10;
+}
+
+.container {
+  position: absolute;
+  --background: linear-gradient(135deg, #9c8294, var(--ion-color-primary));
+  top: 44px;
+  .header {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid blanchedalmond;
+    label {
+      font-size: 22px;
+      color: cornsilk;
+    }
+  }
+  .text-none-note {
+    text-align: center;
+    margin-top: 100px;
+    font-style: italic;
+    font-size: 20px;
+    color: aliceblue;
+  }
+  .calendar {
+    width: 90%;
+    margin-left: 5%;
+    border-radius: 30px;
+    margin-top: 15px;
+  }
+  .calendar-btn {
+    text-align: center;
+  }
+  .btn-add-note {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  .btn-add {
+    bottom: 55px;
+    .icon-note {
+      &::after {
+        content: 'Ghi chú';
+        position: absolute;
+        right: 53px;
+        bottom: 10px;
+      }
+    }
+    .icon-heart {
+      &::after {
+        content: ':)';
+        position: absolute;
+        right: 53px;
+        bottom: 10px;
+      }
+    }
+  }
+
+  ion-list {
+    margin-top: 50px;
+    background: transparent;
+    ion-item {
+      --background: transparent;
+    }
+  }
+}
+.modal {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  &-title {
+    width: 100%;
+    text-align: center;
+    margin-top: 25px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  &-error {
+    color: red;
+    font-size: 12px;
+    font-style: italic;
+    padding: 0 0 0 16px;
+  }
+  &-input {
+    margin-left: 5%;
+    width: 90%;
+    padding-bottom: 30px;
+    border-radius: 10px;
+    background-color: white;
+    position: relative;
+    .btn-x {
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      width: 25px;
+      height: 25px;
+    }
+  }
+  .btn-submit {
+    text-align: center;
+    margin-top: 30px;
+    width: 100%;
+  }
+  .alarm {
+    margin-top: 15px;
+  }
+}
+

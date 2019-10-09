@@ -1,0 +1,77 @@
+<ion-header class="header">
+  <ion-toolbar>
+	<ion-title>
+	  Đặt lịch
+	</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="container">
+  <ion-calendar #calendarRef
+				class="calendar"
+				[(ngModel)]="dateRange"
+				(change)="onChangeDay($event)"
+				[options]="optionsRange"
+				[type]="type"
+				[format]="'YYYY-MM-DD'"
+				(monthChange)="monthChange()">
+  </ion-calendar>
+  <!--  <ion-button class="btn-add-note" *ngIf="date" (click)="createNote()">-->
+  <!--	Thêm note ngày {{date}}-->
+  <!--  </ion-button>-->
+  <ion-list *ngIf="showDataNote?.length > 0">
+	<div *ngFor="let data of showDataNote">
+	  <ion-item>
+		<ion-label>Tên sự kiện</ion-label>
+		<ion-text>{{data?.noteName}}</ion-text>
+	  </ion-item>
+	  <ion-item>
+		<ion-label>Nội dung</ion-label>
+		<ion-text>{{data?.noteContent}}</ion-text>
+	  </ion-item>
+	</div>
+  </ion-list>
+  <div class="text-none-note" *ngIf="showDataNote?.length == 0">
+	<ion-text>Không có sự kiện</ion-text>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="btn-add" *ngIf="date">
+	<ion-fab-button>
+	  <ion-icon name="ios-add-circle-outline"></ion-icon>
+	</ion-fab-button>
+	<ion-fab-list side="top">
+	  <ion-fab-button class="icon-note" (click)="createNote()">
+		<ion-icon name="md-list-box"></ion-icon>
+	  </ion-fab-button>
+	  <ion-fab-button class="icon-heart">
+		<ion-icon name="ios-heart"></ion-icon>
+	  </ion-fab-button>
+	</ion-fab-list>
+  </ion-fab>
+</ion-content>
+
+<div *ngIf="isOpenModal" class="modal">
+  <div class="modal-input">
+	<ion-icon name="md-close" class="btn-x" (click)="closeModal()"></ion-icon>
+	<p class="modal-title">Tạo ghi chú ngày {{date}}</p>
+	<div>
+	  <ion-item>
+		<ion-label position="floating">Tên sự kiện</ion-label>
+		<ion-input clearInput minlength="6" [(ngModel)]="noteName"></ion-input>
+	  </ion-item>
+	  <span class="modal-error" *ngIf="noteName.length > 0 && noteName.length < 6">Hãy nhập hơn 6 kí tự</span>
+	  <ion-item>
+		<ion-label position="floating">Mô tả</ion-label>
+		<ion-input clearInput minlength="6" [(ngModel)]="noteContent"></ion-input>
+	  </ion-item>
+	  <span class="modal-error" *ngIf="noteContent.length > 0 && noteContent.length < 6">Hãy nhập hơn 6 kí tự</span>
+	  <ion-item class="alarm">
+		<ion-label position="floating">Báo thức</ion-label>
+		<ion-datetime cancelText="Đặt làm gì?" doneText="Đặt" (ionCancel)="cancelAlarm()" displayFormat="h:mm A"
+					  picker-format="h:mm A" [(ngModel)]="timeAlarm" placeholder="Chưa đặt báo thức"></ion-datetime>
+	  </ion-item>
+	  <div class="btn-submit">
+		<ion-button size="large" (click)="submitCreateNote()" [disabled]="!checkValidate()">Tạo ghi chú</ion-button>
+	  </div>
+	</div>
+  </div>
+</div>

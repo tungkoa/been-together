@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+	<ion-title>
+	  Góp ý
+	</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content">
+  <div>
+	<ion-avatar>
+	  <img src="" alt="">
+	</ion-avatar>
+  </div>
+  <ion-item disabled="true">
+	<ion-text>
+	  Ví dụ:<br> anh làm cái app toàn màu hồng cho hợp với lứa tuổi của em <3
+	</ion-text>
+  </ion-item>
+  <div class="title">
+	<ion-text>Góp ý của <a (click)="openFacebook('l1811')">bô</a></ion-text>
+  </div>
+  <div *ngIf="this.listShowFb.length === 0" class="text-none-fb">
+	<ion-text>Bô chưa có góp ý nào</ion-text>
+  </div>
+  <ion-item *ngFor="let fb of listShowFb" class="fb-item">
+	<ion-text>{{fb.attributes.feedback}}</ion-text>
+	<ion-icon ios="ios-close" md="md-close" (click)="deleteFb(fb.id)"></ion-icon>
+  </ion-item>
+  <ion-button class="button-submit" (click)="feedBack('open')">Hòm thư góp ý</ion-button>
+</ion-content>
+
+<div *ngIf="isOpenFeedBack" class="modal">
+  <div class="modal-input">
+	<ion-icon name="md-close" class="btn-x" (click)="feedBack('close')"></ion-icon>
+	<p class="modal-title">Giúp <a (click)="openFacebook('tp997')">tôi</a> cải thiện phần mềm</p>
+	<p class="modal-titleText">Nơi góp ý cho app những thứ được và chưa được, những thứ cần có </p>
+	<div>
+	  <ion-item>
+		<ion-label position="floating"></ion-label>
+		<ion-textarea clearInput minlength="6" [(ngModel)]="feedBackContent"></ion-textarea>
+	  </ion-item>
+	  <span class="modal-error" *ngIf="feedBackContent.length > 0 && feedBackContent.length < 6">Hãy nhập hơn 6 kí tự</span>
+	  <div class="btn-submit">
+		<ion-button (click)="createFeedBack(feedBackContent)" [disabled]="feedBackContent.length < 6">Bô ngu</ion-button>
+	  </div>
+	</div>
+  </div>
+</div>
